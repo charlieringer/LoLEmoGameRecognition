@@ -1,4 +1,4 @@
-from base_models import td_facenet, td_gamenet, td_audionet
+from utils.base_models import td_facenet, td_gamenet, td_audionet
 from keras.layers import Input, Dense, Dropout, LSTM, BatchNormalization, Concatenate
 from keras.models import Model
 from keras.optimizers import adam
@@ -26,7 +26,7 @@ def game_latent_fusion_model(ts_size):
 	opt = adam(lr=0.0005)
 	plot_model(model, to_file='game.png', show_shapes=True)
 	model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['acc'])
-	print(model.summary())
+	# print(model.summary())
 	return model
 
 
@@ -50,7 +50,7 @@ def face_latent_fusion_model(ts_size):
 	opt = adam(lr=0.0005)
 	plot_model(model, to_file='emo.png', show_shapes=True)
 	model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['acc'], loss_weights=[0.5, 0.5])
-	print(model.summary())
+	# print(model.summary())
 	return model
 
 
@@ -78,7 +78,7 @@ def both_latent_fusion_model(ts_size):
 	opt = adam(lr=0.0005)
 	plot_model(model, to_file='both.png', show_shapes=True)
 	model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['acc'], loss_weights=[0.33, 0.33, 0.33])
-	print(model.summary())
+	# print(model.summary())
 	return model
 
 
@@ -118,7 +118,7 @@ def game_late_fusion_model(ts_size):
 		opt = adam(lr=0.0005)
 		plot_model(model, to_file='game_late_fusion.png', show_shapes=True)
 		model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['acc'])
-		print(model.summary())
+		# print(model.summary())
 		return model
 
 
@@ -150,7 +150,7 @@ def face_late_fusion_model(ts_size):
 		opt = adam(lr=0.0005)
 		plot_model(model, to_file='emo_late_fusion.png', show_shapes=True)
 		model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['acc'], loss_weights=[0.5, 0.5])
-		print(model.summary())
+		# print(model.summary())
 		return model
 
 
@@ -191,7 +191,7 @@ def both_late_fusion_model(ts_size):
 		opt = adam(lr=0.0005)
 		plot_model(model, to_file='all_late_fusion.png', show_shapes=True)
 		model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['acc'], loss_weights=[0.33, 0.33, 0.33])
-		print(model.summary())
+		# print(model.summary())
 		return model
 
 

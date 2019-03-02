@@ -5,6 +5,8 @@ import subprocess
 from librosa import load
 from scipy.stats import zscore
 import math
+from random import shuffle
+from pandas import read_csv
 
 
 def generate_dummy_data(batch_size, ts_size):
@@ -110,7 +112,39 @@ def process_audio(video, outdir):
 	np.save("%s/audio.npy" % outdir, processed_array)
 
 
+def split_data():
+	videos = [f.name for f in os.scandir("out/") if f.is_dir()]
+	shuffle(videos)
+	if not os.path.exists("out/train"):
+		os.makedirs("out/train")
+	if not os.path.exists("out/test"):
+		os.makedirs("out/test")
+
+	split_indx = int(len(videos)*0.8)
+	for video in videos[split_indx:]:
+		os.rename("out/%s" % video, "out/test/%s" % video)
+
+	for video in videos[:split_indx]:
+		os.rename("out/%s" % video, "out/train/%s" % video)
+
+
+def split_csv(in_file, out_train, out_test, test_split=0.8):
+	data = read_csv(in_file)
+	data = data[data[' Misc'] != 1]
+	n_data = len(data.index)
+	split = int(n_data*test_split)
+	data = data.sample(frac=1)
+
+	train_split = data[:split]
+	test_split = data[split:]
+
+	train_split.to_csv(out_train)
+	test_split.to_csv(out_test)
+
+
 def main():
+	split_csv("../master.csv", "train.csv", "test.csv")
+	return
 	data_dir = "data/"
 	output_dir = "out_test/"
 	videos = [f for f in os.listdir(data_dir) if f.endswith(".mp4")]
