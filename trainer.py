@@ -19,9 +19,8 @@ def process_labels(raw_y_data):
     pushing = raw_y_data[' Pushing']
     defending = raw_y_data[' Defending']
     dead = raw_y_data[' Dead']
-    misc = raw_y_data[' Misc']
 
-    game_events = np.array([laning, shopping, returning, roaming, fighting, pushing, defending, dead, misc])
+    game_events = np.array([laning, shopping, returning, roaming, fighting, pushing, defending, dead])
     return valence, arousal, game_events
 
 
@@ -51,7 +50,7 @@ def data_generator(data_dir, labels, batch_size, model_flag, shuffle_data=True):
             game_event_labels.append(proc_y_data[2])
             video_file = y_data.iloc[index]['File']
             face_data.append(np.load("%s/%s/face.npy" % (data_dir, video_file)))
-            game_data.append(np.load("%s/%s/game.npy" % (data_dir, video_file )))
+            game_data.append(np.load("%s/%s/game.npy" % (data_dir, video_file)))
             audio_data.append(np.load("%s/%s/audio.npy" % (data_dir, video_file)))
             index += 1
             curr_batch_i += 1
@@ -160,15 +159,15 @@ def main():
     batch_size = 5
     epochs = 50
     data_dir = "out"
-    train_labels = "train.csv"
+    train_labels = "train_augmented.csv"
     test_labels = "test.csv"
     train_late = False
 
-    # train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
-    # train_all_latent(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+    train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+    train_all_latent(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
 
-    get_conf_mat_all_late(ts_size, data_dir, test_labels, batch_size)
-    get_conf_mat_all_latent(ts_size, data_dir, test_labels, batch_size)
+    # get_conf_mat_all_late(ts_size, data_dir, test_labels, batch_size)
+    # get_conf_mat_all_latent(ts_size, data_dir, test_labels, batch_size)
 
 
 if __name__ == "__main__":

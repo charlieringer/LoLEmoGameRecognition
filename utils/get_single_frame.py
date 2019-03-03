@@ -1,6 +1,6 @@
 import cv2
-import numpy as np
 import os
+
 
 def get_single_frame(video, outdir):
 	cap = cv2.VideoCapture(video)
@@ -8,6 +8,7 @@ def get_single_frame(video, outdir):
 		os.makedirs(outdir)
 	_, frame = cap.read()
 	cv2.imwrite("%s/%s.png" % (outdir, 0), frame)
+
 
 def main():
 	data_dir = "data/"

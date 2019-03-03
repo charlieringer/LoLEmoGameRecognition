@@ -10,7 +10,7 @@ def get_conf_matrx(model, data_gen, batch_size, n_videos, model_flag):
 def get_conf_matrx_both(model, data_gen, batch_size, n_videos):
     val_cnf_mat = [[0 for _ in range(3)] for _ in range(3)]
     aro_cnf_mat = [[0 for _ in range(3)] for _ in range(3)]
-    gam_cnf_mat = [[0 for _ in range(9)] for _ in range(9)]
+    gam_cnf_mat = [[0 for _ in range(8)] for _ in range(8)]
 
     for _ in range(int(n_videos/batch_size)):
         data = next(data_gen)
@@ -29,12 +29,12 @@ def get_conf_matrx_both(model, data_gen, batch_size, n_videos):
         print(aro_cnf_mat[i])
 
     print("Game Conf Mat")
-    for i in range(9):
+    for i in range(8):
         print(gam_cnf_mat[i])
 
 
 def get_conf_matrx_game(model, data_gen, batch_size, n_videos):
-    gam_cnf_mat = [[0 for _ in range(9)] for _ in range(9)]
+    gam_cnf_mat = [[0 for _ in range(8)] for _ in range(8)]
 
     for _ in range(int(n_videos / batch_size)):
         data = next(data_gen)
@@ -43,7 +43,7 @@ def get_conf_matrx_game(model, data_gen, batch_size, n_videos):
             gam_cnf_mat[res[i].argmax()][data[1][0][i].argmax()] += 1
 
     print("Game Conf Mat")
-    for i in range(9):
+    for i in range(8):
         print(gam_cnf_mat[i])
 
 
