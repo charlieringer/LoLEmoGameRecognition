@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c4f71f5-9315-4a55-acae-c660886ddd3c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/utils/extern/TTLayer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/extern/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/both.png" beforeDir="false" afterPath="$PROJECT_DIR$/both.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game.png" beforeDir="false" afterPath="$PROJECT_DIR$/game.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/both.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/emo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/conf_mats.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/conf_mats.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data_set_descriptors.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_set_descriptors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/get_single_frame.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/get_single_frame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/train_augmented.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,14 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="168" column="29" selection-start-line="168" selection-start-column="29" selection-end-line="168" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="363">
+              <caret line="167" selection-start-line="167" selection-end-line="167" />
             </state>
           </provider>
         </entry>
@@ -56,7 +55,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/augment_annotations.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
+            <state relative-caret-position="1760">
               <caret line="110" column="1" selection-start-line="110" selection-start-column="1" selection-end-line="110" selection-end-column="1" />
             </state>
           </provider>
@@ -75,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/utils/data_set_descriptors.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1280">
-              <caret line="80" column="5" lean-forward="true" selection-start-line="75" selection-start-column="7" selection-end-line="80" selection-end-column="5" />
+              <caret line="80" column="5" selection-start-line="75" selection-start-column="7" selection-end-line="80" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -89,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+            <state relative-caret-position="459">
+              <caret line="299" column="60" selection-start-line="299" selection-start-column="60" selection-end-line="299" selection-end-column="60" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
               </folding>
@@ -102,9 +101,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/extern/TTLayer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="523">
+              <caret line="102" column="59" selection-start-line="100" selection-start-column="23" selection-end-line="102" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/process_data_set.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
+            <state relative-caret-position="1968">
               <caret line="131" selection-start-line="131" selection-end-line="132" selection-end-column="35" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -116,11 +124,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/base_models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="779">
+            <state relative-caret-position="3168">
               <caret line="204" selection-start-line="204" selection-end-line="204" />
-              <folding>
-                <element signature="e#1#215#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -161,17 +166,19 @@
         <option value="$PROJECT_DIR$/utils/get_single_frame.py" />
         <option value="$PROJECT_DIR$/utils/conf_mats.py" />
         <option value="$PROJECT_DIR$/utils/augment_annotations.py" />
+        <option value="$PROJECT_DIR$/utils/data_set_descriptors.py" />
+        <option value="$PROJECT_DIR$/utils/TT_Layer.py" />
+        <option value="$PROJECT_DIR$/utils/tensor_train.py" />
         <option value="$PROJECT_DIR$/trainer.py" />
         <option value="$PROJECT_DIR$/utils/models.py" />
-        <option value="$PROJECT_DIR$/utils/data_set_descriptors.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="125" />
-    <option name="y" value="511" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -191,6 +198,12 @@
               <item name="paper_2" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="paper_2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="paper_2" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="extern" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -206,6 +219,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\paper_2\utils\extern" />
       <recent name="E:\paper_2\utils" />
       <recent name="E:\paper_2\out\utils" />
       <recent name="E:\paper_2" />
@@ -223,7 +237,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.augment_annotations">
+  <component name="RunManager" selected="Python.trainer">
     <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="paper_2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -272,6 +286,9 @@
       <module name="paper_2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -313,6 +330,9 @@
       <module name="paper_2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -354,6 +374,9 @@
       <module name="paper_2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -379,8 +402,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.augment_annotations" />
         <item itemvalue="Python.trainer" />
+        <item itemvalue="Python.augment_annotations" />
         <item itemvalue="Python.process_data_set (1)" />
         <item itemvalue="Python.process_data_set" />
         <item itemvalue="Python.highlight_classifier" />
@@ -399,26 +422,27 @@
       <updated>1550521555652</updated>
       <workItem from="1550521556747" duration="16732000" />
       <workItem from="1550998828930" duration="8635000" />
-      <workItem from="1551426222309" duration="23588000" />
+      <workItem from="1551426222309" duration="31388000" />
+      <workItem from="1551910308065" duration="1584000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48955000" />
+    <option name="totallyTimeSpent" value="58339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.50080776" side_tool="true" weight="0.114072494" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49919224" visible="true" weight="0.114072494" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49919224" visible="true" weight="0.11513859" />
       <window_info id="Structure" order="2" sideWeight="0.50080776" side_tool="true" weight="0.114072494" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.3298731" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="5" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Python Console" order="5" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="6" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936078" />
@@ -426,7 +450,7 @@
       <window_info anchor="bottom" id="Run" order="10" weight="0.032502707" />
       <window_info anchor="bottom" id="Debug" order="11" weight="0.3997833" />
       <window_info anchor="bottom" id="TODO" order="12" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="0" side_tool="true" weight="0.32995737" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="0" side_tool="true" visible="true" weight="0.32995737" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Database" order="2" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
@@ -467,9 +491,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/aud_test.py" />
-    <entry file="file://$PROJECT_DIR$/late_fusion.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/late_fusion.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/numpy/lib/npyio.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -477,47 +499,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/base_models.py">
+    <entry file="file://$PROJECT_DIR$/trainer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="204" selection-start-line="204" selection-end-line="204" />
-          <folding>
-            <element signature="e#1#215#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="363">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/models.py">
+    <entry file="file://$PROJECT_DIR$/utils/augment_annotations.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/data_set_descriptors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1280">
-          <caret line="80" column="5" lean-forward="true" selection-start-line="75" selection-start-column="7" selection-end-line="80" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/process_data_set.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="131" selection-start-line="131" selection-end-line="132" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/get_single_frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="10" selection-start-column="10" selection-end-column="10" />
+        <state relative-caret-position="1760">
+          <caret line="110" column="1" selection-start-line="110" selection-start-column="1" selection-end-line="110" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -528,19 +520,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/augment_annotations.py">
+    <entry file="file://$PROJECT_DIR$/utils/data_set_descriptors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="110" column="1" selection-start-line="110" selection-start-column="1" selection-end-line="110" selection-end-column="1" />
+        <state relative-caret-position="1280">
+          <caret line="80" column="5" selection-start-line="75" selection-start-column="7" selection-end-line="80" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trainer.py">
+    <entry file="file://$PROJECT_DIR$/utils/get_single_frame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="168" column="29" selection-start-line="168" selection-start-column="29" selection-end-line="168" selection-end-column="29" />
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/process_data_set.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1968">
+          <caret line="131" selection-start-line="131" selection-end-line="132" selection-end-column="35" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/base_models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3168">
+          <caret line="204" selection-start-line="204" selection-end-line="204" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/extern/TTLayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="102" column="59" selection-start-line="100" selection-start-column="23" selection-end-line="102" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="299" column="60" selection-start-line="299" selection-start-column="60" selection-end-line="299" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#65#0" expanded="true" />
           </folding>
         </state>
       </provider>

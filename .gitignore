@@ -1,4 +1,4 @@
 data/
 out/
 *.h5
-master.csv
+*.csv

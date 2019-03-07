@@ -1,4 +1,4 @@
-from utils.models import get_latent_fusion_model, get_late_fusion_model
+from utils.models import get_feature_fusion_model, get_late_fusion_model
 from utils.data_set_descriptors import calculate_class_weights
 import numpy as np
 import os
@@ -92,7 +92,19 @@ def train_latent_fusion_model(ts_size, batch_size, epochs, data_dir, train_label
     train_gen, n_train = get_generator(data_dir, train_labels, batch_size, model_flag=model_flag)
     test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag=model_flag)
 
-    model = get_latent_fusion_model(ts_size, model_flag)
+    model = get_feature_fusion_model(ts_size, model_flag)
+    model.fit_generator(train_gen, steps_per_epoch=int(n_train / batch_size), epochs=epochs, class_weight=class_weights)
+    model.save_weights(model_out)
+    get_conf_matrx(model, test_gen, batch_size, n_test, model_flag)
+
+
+def train_tt_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                          class_weights, model_flag, model_out):
+    from utils.models import get_fac_feature_fusion_model
+    train_gen, n_train = get_generator(data_dir, train_labels, batch_size, model_flag=model_flag)
+    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag=model_flag)
+
+    model = get_fac_feature_fusion_model(ts_size, model_flag)
     model.fit_generator(train_gen, steps_per_epoch=int(n_train / batch_size), epochs=epochs, class_weight=class_weights)
     model.save_weights(model_out)
     get_conf_matrx(model, test_gen, batch_size, n_test, model_flag)
@@ -138,17 +150,17 @@ def get_conf_mat_all_late(ts_size, data_dir, test_labels, batch_size):
 
 
 def get_conf_mat_all_latent(ts_size, data_dir, test_labels, batch_size):
-    model = get_latent_fusion_model(ts_size, "both")
+    model = get_feature_fusion_model(ts_size, "both")
     model.load_weights("trained_models/both_latent_fusion.h5")
     test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="both")
     get_conf_matrx(model, test_gen, batch_size, n_test, "both")
 
-    model = get_latent_fusion_model(ts_size, "game")
+    model = get_feature_fusion_model(ts_size, "game")
     model.load_weights("trained_models/game_latent_fusion.h5")
     test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="game")
     get_conf_matrx(model, test_gen, batch_size, n_test, "game")
 
-    model = get_latent_fusion_model(ts_size, "face")
+    model = get_feature_fusion_model(ts_size, "face")
     model.load_weights("trained_models/face_latent_fusion.h5")
     test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="face")
     get_conf_matrx(model, test_gen, batch_size, n_test, "face")
@@ -163,8 +175,15 @@ def main():
     test_labels = "test.csv"
     train_late = False
 
-    train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
-    train_all_latent(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+    #train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+    #train_all_latent(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+
+    #from utils.models import get_fac_feature_fusion_model
+    #model = get_fac_feature_fusion_model(ts_size, "both")
+    v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
+    train_tt_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                          [v_weights, a_weights, g_weights], "both", "trained_models/both_tt_fusion.h5")
+    # model = get_late_fusion_model(ts_size, "both")
 
     # get_conf_mat_all_late(ts_size, data_dir, test_labels, batch_size)
     # get_conf_mat_all_latent(ts_size, data_dir, test_labels, batch_size)
