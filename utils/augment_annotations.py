@@ -5,13 +5,12 @@ def calculate_class_weights(annotations):
 	n_v_neg = annotations[' V_Neg'].sum()
 	n_v_neut = annotations[' V_Neut'].sum()
 	n_v_pos = annotations[' V_Pos'].sum()
-	n_a_neg = annotations[' A_Neg'].sum()
 	n_a_neut = annotations[' A_Neut'].sum()
 	n_a_pos = annotations[' A_Pos'].sum()
 
 	tot = n_v_neg + n_v_neut + n_v_pos
 
-	print(float(n_v_neg/tot), " " , float(n_v_neut/tot), " ", float(n_v_pos/tot), " ", float(n_a_neg/tot),
+	print(float(n_v_neg/tot), " " , float(n_v_neut/tot), " ", float(n_v_pos/tot), " ",
 	      " ",  float(n_a_neut/tot), " ", float(n_a_pos/tot))
 
 	n_laning = annotations[' Laning'].sum()
@@ -37,7 +36,6 @@ def get_least_most_rep_class(annotations):
 	}
 
 	aro_dict = {
-		' A_Neg': annotations[' A_Neg'].sum(),
 		' A_Neut': annotations[' A_Neut'].sum(),
 		' A_Pos': annotations[' A_Pos'].sum()
 	}
@@ -75,7 +73,7 @@ def get_least_most_rep_class(annotations):
 	biggest_gam = max(game_dict, key=game_dict.get)
 
 	weighted_biggest_val = float(annotations[biggest_val].sum()/total)/(1./3.)
-	weighted_biggest_aro = float(annotations[biggest_aro].sum()/total)/(1./3.)
+	weighted_biggest_aro = float(annotations[biggest_aro].sum()/total)/(1./2.)
 	weighted_biggest_gam = float(annotations[biggest_gam].sum()/total)/(1./8.)
 
 	if(weighted_biggest_val > weighted_biggest_aro) and (weighted_biggest_val > weighted_biggest_gam):
@@ -90,10 +88,9 @@ def get_least_most_rep_class(annotations):
 
 def main():
 	annotations = read_csv("../train.csv")
-	annotations = annotations[annotations[' Misc'] != 1]
 	calculate_class_weights(annotations)
 
-	for i in range(0, 2758):
+	for i in range(0, 5513):
 		
 		least_class, most_class = get_least_most_rep_class(annotations)
 

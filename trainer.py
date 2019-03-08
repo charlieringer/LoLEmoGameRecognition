@@ -1,15 +1,16 @@
-from utils.models import get_feature_fusion_model, get_late_fusion_model, get_tt_fusion_model
+from utils.models import feature_fusion_model, late_fusion_model, tt_fusion_model
 from utils.data_set_descriptors import calculate_class_weights
 import numpy as np
 import os
 from pandas import read_csv
 from utils.conf_mats import get_conf_matrx
+import pickle
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/graphviz-2.38/release/bin/'
 
 
 def process_labels(raw_y_data):
     valence = np.array([raw_y_data[' V_Neg'], raw_y_data[' V_Neut'], raw_y_data[' V_Pos']])
-    arousal = np.array([raw_y_data[' A_Neg'], raw_y_data[' A_Neut'], raw_y_data[' A_Pos']])
+    arousal = np.array([raw_y_data[' A_Neut'], raw_y_data[' A_Pos']])
 
     laning = raw_y_data[' Laning']
     shopping = raw_y_data[' Shopping']
@@ -24,7 +25,7 @@ def process_labels(raw_y_data):
     return valence, arousal, game_events
 
 
-def data_generator(data_dir, labels, batch_size, model_flag, shuffle_data=True):
+def data_generator(data_dir, labels, batch_size, model_flag, include_tt_bias=False, shuffle_data=True):
     y_data = read_csv(labels)
     if shuffle_data:
         y_data = y_data.sample(frac=1)
@@ -54,199 +55,133 @@ def data_generator(data_dir, labels, batch_size, model_flag, shuffle_data=True):
             audio_data.append(np.load("%s/%s/audio.npy" % (data_dir, video_file)))
             index += 1
             curr_batch_i += 1
+
+        if include_tt_bias:
+            inputs = [np.array(face_data), np.array(game_data), np.array(audio_data), np.ones((batch_size, 1))]
+        else:
+            inputs = [np.array(face_data), np.array(game_data), np.array(audio_data)]
+
         if model_flag == "both":
-                yield [np.array(face_data), np.array(game_data), np.array(audio_data)], \
-                    [np.array(valence_labels), np.array(arousal_labels), np.array(game_event_labels)]
+            outputs = [np.array(valence_labels), np.array(arousal_labels), np.array(game_event_labels)]
         elif model_flag == "face":
-                yield [np.array(face_data), np.array(audio_data)], [np.array(valence_labels), np.array(arousal_labels)]
-        elif model_flag == "game":
-                yield [np.array(game_data), np.array(audio_data)], [np.array(game_event_labels)]
+            outputs = [np.array(valence_labels), np.array(arousal_labels)]
+        else:
+            outputs = [np.array(game_event_labels)]
+
+        yield inputs, outputs
 
 
-def data_generator_tt(data_dir, labels, batch_size, model_flag, shuffle_data=True):
-    y_data = read_csv(labels)
-    if shuffle_data:
-        y_data = y_data.sample(frac=1)
-    index = 0
-    while True:
-        face_data = []
-        game_data = []
-        audio_data = []
-        valence_labels = []
-        arousal_labels = []
-        game_event_labels = []
-        curr_batch_i = 0
-        while curr_batch_i < batch_size:
-            if index >= len(y_data.index):
-                index = 0
-                if shuffle_data:
-                    y_data = y_data.sample(frac=1)
-            raw_y_data = y_data.iloc[index]
-            proc_y_data = process_labels(raw_y_data)
-
-            valence_labels.append(proc_y_data[0])
-            arousal_labels.append(proc_y_data[1])
-            game_event_labels.append(proc_y_data[2])
-            video_file = y_data.iloc[index]['File']
-            face_data.append(np.load("%s/%s/face.npy" % (data_dir, video_file)))
-            game_data.append(np.load("%s/%s/game.npy" % (data_dir, video_file)))
-            audio_data.append(np.load("%s/%s/audio.npy" % (data_dir, video_file)))
-            index += 1
-            curr_batch_i += 1
-        if model_flag == "both":
-                yield [np.array(face_data), np.array(game_data), np.array(audio_data), np.ones((batch_size, 1))], \
-                    [np.array(valence_labels), np.array(arousal_labels), np.array(game_event_labels)]
-        elif model_flag == "face":
-                yield [np.array(face_data), np.array(audio_data), np.ones((batch_size, 1))], [np.array(valence_labels),
-                                                                                            np.array(arousal_labels)]
-        elif model_flag == "game":
-                yield [np.array(game_data), np.array(audio_data),
-                       np.ones((batch_size, 1))], [np.array(game_event_labels)]
-
-
-def get_generator(data_dir, labels, batch_size, model_flag):	
+def get_generator(data_dir, labels, batch_size, model_flag, include_tt_bias=False):
     """Makes and returns a generator which loads data from the supplied dir as and when needed
     
     :param data_dir: Folder containing the folders with the targets (data)
     :param labels: Width of the image
     :param batch_size: Number of images per batch
-    :param model_flag: Number of images per batch
+    :param include_tt_bias: Number of images per batch
     :return: A generator to be used by a Keras model to read data
     """
     number_of_videos = len(read_csv(labels).index)
-    return data_generator(data_dir, labels, batch_size, model_flag), number_of_videos
+    return data_generator(data_dir, labels, batch_size, model_flag, include_tt_bias), number_of_videos
 
 
-def get_generator_tt(data_dir, labels, batch_size, model_flag):
-    """Makes and returns a generator which loads data from the supplied dir as and when needed
+def run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   class_weights, model_flag, fusion_type, model_out, history_out, test_out):
+    train_gen, n_train = get_generator(data_dir, train_labels, batch_size, model_flag, fusion_type == "tt")
+    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag, fusion_type == "tt")
 
-    :param data_dir: Folder containing the folders with the targets (data)
-    :param labels: Width of the image
-    :param batch_size: Number of images per batch
-    :param model_flag: Number of images per batch
-    :return: A generator to be used by a Keras model to read data
-    """
-    number_of_videos = len(read_csv(labels).index)
-    return data_generator_tt(data_dir, labels, batch_size, model_flag), number_of_videos
+    if fusion_type == "tt":
+        model = tt_fusion_model(ts_size, model_flag)
+    elif fusion_type == "late":
+        model = late_fusion_model(ts_size, model_flag)
+    else:
+        model = feature_fusion_model(ts_size, model_flag)
 
+    history = model.fit_generator(train_gen, steps_per_epoch=int(n_train / batch_size),
+                                  epochs=epochs, class_weight=class_weights)
 
-def train_late_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                            class_weights, model_flag, model_out):
-    train_gen, n_train = get_generator(data_dir, train_labels, batch_size, model_flag=model_flag)
-    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag=model_flag)
-
-    model = get_late_fusion_model(ts_size, model_flag)
-    model.fit_generator(train_gen, steps_per_epoch=int(n_train / batch_size), epochs=epochs, class_weight=class_weights)
+    with open('%s' % history_out, 'wb') as file_pi:
+        pickle.dump(history.history, file_pi)
     model.save_weights(model_out)
-    get_conf_matrx(model, test_gen, batch_size, n_test, model_flag)
+    get_conf_matrx(model, test_gen, batch_size, n_test, model_flag, test_out)
 
 
-def train_latent_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                              class_weights, model_flag, model_out):
-    train_gen, n_train = get_generator(data_dir, train_labels, batch_size, model_flag=model_flag)
-    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag=model_flag)
-
-    model = get_feature_fusion_model(ts_size, model_flag)
-    model.fit_generator(train_gen, steps_per_epoch=int(n_train / batch_size), epochs=epochs, class_weight=class_weights)
-    model.save_weights(model_out)
-    get_conf_matrx(model, test_gen, batch_size, n_test, model_flag)
-
-
-def train_tt_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                          class_weights, model_flag, model_out):
-    train_gen, n_train = get_generator_tt(data_dir, train_labels, batch_size, model_flag=model_flag)
-    test_gen, n_test = get_generator_tt(data_dir, test_labels, batch_size, model_flag=model_flag)
-
-    model = get_tt_fusion_model(ts_size, model_flag)
-    model.fit_generator(train_gen, steps_per_epoch=int(n_train / batch_size), epochs=epochs, class_weight=class_weights)
-    model.save_weights(model_out)
-    get_conf_matrx(model, test_gen, batch_size, n_test, model_flag)
-
-
-def train_all_latent(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
+def train_all_feature(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
     v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
 
-    train_latent_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                              [v_weights, a_weights, g_weights], "both", "trained_models/both_latent_fusion.h5")
-    train_latent_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                              [g_weights], "game", "trained_models/game_latent_fusion.h5")
-    train_latent_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                              [v_weights, a_weights], "face", "trained_models/face_latent_fusion.h5")
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [v_weights, a_weights, g_weights],
+                   "both", "feature",
+                   "trained_models/both_feature_fusion.h5", "training_history/both_feature_fusion.p",
+                   "results/both_feature_fusion.txt")
+
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [g_weights],
+                   "game", "feature",
+                   "trained_models/game_feature_fusion.h5", "training_history/game_feature_fusion.p",
+                   "results/game_feature_fusion.txt")
+
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [v_weights, a_weights],
+                   "face", "feature",
+                   "trained_models/face_feature_fusion.h5", "training_history/face_feature_fusion.p",
+                   "results/face_feature_fusion.txt")
 
 
 def train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
     v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
 
-    train_late_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                              [v_weights, a_weights, g_weights], "both", "trained_models/both_late_fusion.h5")
-    train_late_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                              [g_weights], "game", "trained_models/game_late_fusion.h5")
-    train_late_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                              [v_weights, a_weights], "face", "trained_models/face_late_fusion.h5")
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [v_weights, a_weights, g_weights],
+                   "both", "late",
+                   "trained_models/both_late_fusion.h5", "training_history/both_late_fusion.p",
+                   "results/both_late_fusion.txt")
+
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [g_weights],
+                   "game", "late",
+                   "trained_models/game_late_fusion.h5", "training_history/game_late_fusion.p",
+                   "results/game_late_fusion.txt")
+
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [v_weights, a_weights],
+                   "face", "late",
+                   "trained_models/face_late_fusion.h5", "training_history/face_late_fusion.p",
+                   "results/face_late_fusion.txt")
 
 
-def get_conf_mat_all_late(ts_size, data_dir, test_labels, batch_size):
-    model = get_late_fusion_model(ts_size, "both")
-    model.load_weights("trained_models/both_late_fusion.h5")
-    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="both")
-    get_conf_matrx(model, test_gen, batch_size, n_test, "both")
+def train_all_tt(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
+    v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
 
-    model = get_late_fusion_model(ts_size, "game")
-    model.load_weights("trained_models/game_late_fusion.h5")
-    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="game")
-    get_conf_matrx(model, test_gen, batch_size, n_test, "game")
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [v_weights, a_weights, g_weights],
+                   "both", "tt",
+                   "trained_models/both_tt_fusion.h5", "training_history/both_tt_fusion.p",
+                   "results/both_tt_fusion.txt")
 
-    model = get_late_fusion_model(ts_size, "face")
-    model.load_weights("trained_models/face_late_fusion.h5")
-    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="face")
-    get_conf_matrx(model, test_gen, batch_size, n_test, "face")
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [g_weights],
+                   "game", "tt",
+                   "trained_models/game_tt_fusion.h5", "training_history/game_tt_fusion.p",
+                   "results/game_tt_fusion.txt")
 
-
-def get_conf_mat_all_latent(ts_size, data_dir, test_labels, batch_size):
-    model = get_feature_fusion_model(ts_size, "both")
-    model.load_weights("trained_models/both_latent_fusion.h5")
-    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="both")
-    get_conf_matrx(model, test_gen, batch_size, n_test, "both")
-
-    model = get_feature_fusion_model(ts_size, "game")
-    model.load_weights("trained_models/game_latent_fusion.h5")
-    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="game")
-    get_conf_matrx(model, test_gen, batch_size, n_test, "game")
-
-    model = get_feature_fusion_model(ts_size, "face")
-    model.load_weights("trained_models/face_latent_fusion.h5")
-    test_gen, n_test = get_generator(data_dir, test_labels, batch_size, model_flag="face")
-    get_conf_matrx(model, test_gen, batch_size, n_test, "face")
+    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+                   [v_weights, a_weights],
+                   "face", "tt",
+                   "trained_models/face_tt_fusion.h5", "training_history/face_tt_fusion.p",
+                   "results/face_tt_fusion.txt")
 
 
 def main():
     ts_size = 20
     batch_size = 5
-    epochs = 50
+    epochs = 100
     data_dir = "out"
     train_labels = "train_augmented.csv"
     test_labels = "test.csv"
-    train_late = False
 
-    #train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
-    #train_all_latent(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
-
-    #from utils.models import get_fac_feature_fusion_model
-    #model = get_fac_feature_fusion_model(ts_size, "both")
-    v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
-    train_tt_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                          [v_weights, a_weights, g_weights], "both", "trained_models/both_tt_fusion.h5")
-
-    #train_tt_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-    #                      [v_weights, a_weights], "face", "trained_models/face_tt_fusion.h5")
-
-    #train_tt_fusion_model(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-    #                      [g_weights], "game", "trained_models/game_tt_fusion.h5")
-
-    # model = get_late_fusion_model(ts_size, "both")
-
-    # get_conf_mat_all_late(ts_size, data_dir, test_labels, batch_size)
-    # get_conf_mat_all_latent(ts_size, data_dir, test_labels, batch_size)
+    train_all_feature(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+    train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+    train_all_tt(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
 
 
 if __name__ == "__main__":

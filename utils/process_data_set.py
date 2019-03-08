@@ -75,9 +75,9 @@ def process_frames(video, outdir, face_loc):
 		face = np.array(frame[face_loc[1]:face_loc[3], face_loc[0]:face_loc[2], :])
 		cv2.rectangle(frame, (face_loc[0], face_loc[1]), (face_loc[2], face_loc[3]), -1, -1)
 
-		face = cv2.resize(face, (128, 128))
+		face = cv2.resize(face, (64, 64))
 		# cv2.imwrite("%s/face_%i.png" % (outdir, curr_frame), face)
-		game = cv2.resize(frame, (256, 256))
+		game = cv2.resize(frame, (128, 128))
 		# cv2.imwrite("%s/game_%i.png" % (outdir, curr_frame), game)
 		face_imgs.append(face)
 		game_imgs.append(game)
@@ -143,12 +143,11 @@ def split_csv(in_file, out_train, out_test, test_split=0.8):
 
 
 def main():
-	# split_csv("../master.csv", "train.csv", "test.csv")
-	# return
+	split_csv("../master.csv", "train.csv", "test.csv")
+	return
 	data_dir = "../data/"
-	output_dir = "out_test/"
+	output_dir = "out/"
 	videos = [f for f in os.listdir(data_dir) if f.endswith(".mp4")]
-	print(len(videos))
 	
 	for video in videos:
 		streamer_id = get_streamer_id(video)
