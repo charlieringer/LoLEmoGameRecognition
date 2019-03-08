@@ -9,22 +9,19 @@ import os
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/graphviz-2.38/release/bin/'
 
 
-def conv_1d_feature_extractor_layers(input_shape, n_features):
+def audionet(input_shape, n_features):
     input_tensor = Input(input_shape)
     x = Conv1D(128, 5, padding='same', activation='relu')(input_tensor)
     x = MaxPooling1D(pool_size=8)(x)
     x = BatchNormalization()(x)
-    # x = Dropout(0.2)(x)
 
     x = Conv1D(128, 5, padding='same', activation='relu')(x)
     x = MaxPooling1D(pool_size=8)(x)
     x = BatchNormalization()(x)
-    # x = Dropout(0.2)(x)
 
     x = Conv1D(128, 5, padding='same', activation='relu')(x)
     x = MaxPooling1D(pool_size=8)(x)
     x = BatchNormalization()(x)
-    # x = Dropout(0.2)(x)
 
     x = Flatten()(x)
     x = Dense(n_features, activation='relu')(x)
@@ -33,7 +30,7 @@ def conv_1d_feature_extractor_layers(input_shape, n_features):
 
 
 def td_audionet(input_shape, n_features):
-    return TimeDistributed(conv_1d_feature_extractor_layers(input_shape, n_features))
+    return TimeDistributed(audionet(input_shape, n_features))
 
 
 def _add_norm_relu(x):
