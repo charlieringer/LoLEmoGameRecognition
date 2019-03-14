@@ -108,17 +108,17 @@ def run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_lab
 def train_all_feature(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
     v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
 
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                   [v_weights, a_weights, g_weights],
-                   "both", "feature",
-                   "trained_models/both_feature_fusion.h5", "training_history/both_feature_fusion.p",
-                   "results/both_feature_fusion.txt")
-
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                   [g_weights],
-                   "game", "feature",
-                   "trained_models/game_feature_fusion.h5", "training_history/game_feature_fusion.p",
-                   "results/game_feature_fusion.txt")
+    # run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+    #                [v_weights, a_weights, g_weights],
+    #                "both", "feature",
+    #                "trained_models/both_feature_fusion.h5", "training_history/both_feature_fusion.p",
+    #                "results/both_feature_fusion.txt")
+    #
+    # run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+    #                [g_weights],
+    #                "game", "feature",
+    #                "trained_models/game_feature_fusion.h5", "training_history/game_feature_fusion.p",
+    #                "results/game_feature_fusion.txt")
 
     run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
                    [v_weights, a_weights],
@@ -130,11 +130,11 @@ def train_all_feature(ts_size, batch_size, epochs, data_dir, train_labels, test_
 def train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
     v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
 
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                   [v_weights, a_weights, g_weights],
-                   "both", "late",
-                   "trained_models/both_late_fusion.h5", "training_history/both_late_fusion.p",
-                   "results/both_late_fusion.txt")
+    #run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
+    #               [v_weights, a_weights, g_weights],
+    #               "both", "late",
+    #               "trained_models/both_late_fusion.h5", "training_history/both_late_fusion.p",
+    #               "results/both_late_fusion.txt")
 
     run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
                    [g_weights],
@@ -179,7 +179,7 @@ def main():
     train_labels = "train_augmented.csv"
     test_labels = "test.csv"
 
-    train_all_feature(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+    #train_all_feature(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
     train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
     train_all_tt(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
 

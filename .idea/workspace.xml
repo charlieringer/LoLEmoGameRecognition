@@ -3,20 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="2c4f71f5-9315-4a55-acae-c660886ddd3c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_imgs/both_feature.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/both_feature.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_imgs/both_late.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/both_late.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_imgs/emo_late.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_imgs/game_feature.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/game_feature.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_imgs/face_feature.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/face_feature.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_imgs/face_late.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/face_late.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_imgs/game_late.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/game_late.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_augmented.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/both_feature_fusion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results/both_feature_fusion.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/augment_annotations.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/augment_annotations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/conf_mats.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/conf_mats.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data_set_descriptors.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_set_descriptors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/process_data_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/process_data_set.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training_history/both_feature_fusion.p" beforeDir="false" afterPath="$PROJECT_DIR$/training_history/both_feature_fusion.p" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training_history/game_feature_fusion.p" beforeDir="false" afterPath="$PROJECT_DIR$/training_history/game_feature_fusion.p" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,11 +42,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/trainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="42" />
+            <state relative-caret-position="603">
+              <caret line="136" column="5" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
               <folding>
                 <element signature="e#0#81#0" expanded="true" />
               </folding>
@@ -63,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/augment_annotations.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="17" column="49" lean-forward="true" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
+            <state relative-caret-position="972">
+              <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -90,11 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#65#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1397">
+              <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -102,17 +93,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/extern/TTLayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
+            <state relative-caret-position="1488">
               <caret line="102" column="59" selection-start-line="100" selection-start-column="23" selection-end-line="102" selection-end-column="59" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/process_data_set.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1307">
-              <caret line="137" column="30" lean-forward="true" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
+            <state relative-caret-position="2064">
+              <caret line="137" column="30" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -123,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/base_models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="640">
+              <caret line="46" column="37" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -172,9 +163,9 @@
         <option value="$PROJECT_DIR$/utils/process_data_set.py" />
         <option value="$PROJECT_DIR$/utils/data_set_descriptors.py" />
         <option value="$PROJECT_DIR$/utils/conf_mats.py" />
+        <option value="$PROJECT_DIR$/utils/augment_annotations.py" />
         <option value="$PROJECT_DIR$/utils/models.py" />
         <option value="$PROJECT_DIR$/trainer.py" />
-        <option value="$PROJECT_DIR$/utils/augment_annotations.py" />
       </list>
     </option>
   </component>
@@ -202,12 +193,6 @@
               <item name="paper_2" type="b2602c69:ProjectViewProjectNode" />
               <item name="paper_2" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="paper_2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="paper_2" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="extern" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -290,6 +275,9 @@
       <module name="paper_2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -331,6 +319,9 @@
       <module name="paper_2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -419,26 +410,27 @@
       <workItem from="1550998828930" duration="8635000" />
       <workItem from="1551426222309" duration="31388000" />
       <workItem from="1551910308065" duration="21355000" />
-      <workItem from="1552057861144" duration="15453000" />
+      <workItem from="1552057861144" duration="22013000" />
+      <workItem from="1552245403156" duration="8784000" />
+      <workItem from="1552421646158" duration="1958000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93563000" />
+    <option name="totallyTimeSpent" value="110865000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1208" y="-240" width="1216" height="1936" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.50080776" side_tool="true" weight="0.114072494" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49919224" visible="true" weight="0.16782007" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49919224" visible="true" weight="0.17301038" />
       <window_info id="Structure" order="2" sideWeight="0.50080776" side_tool="true" weight="0.114072494" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.3294509" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32889628" />
-      <window_info anchor="bottom" id="Python Console" order="5" visible="true" weight="0.16860788" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="5" visible="true" weight="0.16860788" />
       <window_info anchor="bottom" id="Database Changes" order="6" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936078" />
@@ -446,7 +438,7 @@
       <window_info anchor="bottom" id="Run" order="10" weight="0.032502707" />
       <window_info anchor="bottom" id="Debug" order="11" weight="0.3997833" />
       <window_info anchor="bottom" id="TODO" order="12" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="0" side_tool="true" weight="0.32958478" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="0" side_tool="true" weight="0.025951557" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Database" order="2" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
@@ -484,13 +476,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/base_models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/get_single_frame.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -501,37 +486,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/extern/TTLayer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="102" column="59" selection-start-line="100" selection-start-column="23" selection-end-line="102" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/conf_mats.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#81#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -542,19 +500,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/augment_annotations.py">
+    <entry file="file://$PROJECT_DIR$/utils/extern/TTLayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="17" column="49" lean-forward="true" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
+        <state relative-caret-position="1488">
+          <caret line="102" column="59" selection-start-line="100" selection-start-column="23" selection-end-line="102" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/process_data_set.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1307">
-          <caret line="137" column="30" lean-forward="true" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
+        <state relative-caret-position="2064">
+          <caret line="137" column="30" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/base_models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="46" column="37" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1397">
+          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/augment_annotations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="136" column="5" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#81#0" expanded="true" />
           </folding>
         </state>
       </provider>
