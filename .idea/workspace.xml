@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c4f71f5-9315-4a55-acae-c660886ddd3c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_imgs/both_late.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/both_late.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_imgs/face_feature.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/face_feature.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_imgs/face_late.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/face_late.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_imgs/game_late.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/game_late.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/both_feature_fusion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results/both_feature_fusion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_imgs/both_tt.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/both_tt.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_imgs/face_tt.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/face_tt.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_imgs/game_tt.png" beforeDir="false" afterPath="$PROJECT_DIR$/model_imgs/game_tt.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training_history/both_feature_fusion.p" beforeDir="false" afterPath="$PROJECT_DIR$/training_history/both_feature_fusion.p" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training_history/game_feature_fusion.p" beforeDir="false" afterPath="$PROJECT_DIR$/training_history/game_feature_fusion.p" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/trainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="136" column="5" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+            <state relative-caret-position="619">
+              <caret line="110" selection-start-line="110" selection-end-line="120" selection-end-column="53" />
               <folding>
                 <element signature="e#0#81#0" expanded="true" />
               </folding>
@@ -170,10 +165,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1064" />
-    <option name="y" value="342" />
-    <option name="width" value="1214" />
-    <option name="height" value="1047" />
+    <option name="x" value="-1208" />
+    <option name="y" value="-240" />
+    <option name="width" value="1216" />
+    <option name="height" value="1936" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -412,15 +407,16 @@
       <workItem from="1551910308065" duration="21355000" />
       <workItem from="1552057861144" duration="22013000" />
       <workItem from="1552245403156" duration="8784000" />
-      <workItem from="1552421646158" duration="1958000" />
+      <workItem from="1552421646158" duration="19778000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110865000" />
+    <option name="totallyTimeSpent" value="128685000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1208" y="-240" width="1216" height="1936" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.50080776" side_tool="true" weight="0.114072494" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49919224" visible="true" weight="0.17301038" />
@@ -438,12 +434,12 @@
       <window_info anchor="bottom" id="Run" order="10" weight="0.032502707" />
       <window_info anchor="bottom" id="Debug" order="11" weight="0.3997833" />
       <window_info anchor="bottom" id="TODO" order="12" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="0" side_tool="true" weight="0.025951557" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Database" order="2" weight="0.32995737" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
-      <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Database" order="1" weight="0.32958478" />
+      <window_info anchor="right" id="SciView" order="2" weight="0.32995737" />
+      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="5" visible="true" weight="0.025951557" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,8 +536,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/trainer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="136" column="5" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+        <state relative-caret-position="619">
+          <caret line="110" selection-start-line="110" selection-end-line="120" selection-end-column="53" />
           <folding>
             <element signature="e#0#81#0" expanded="true" />
           </folding>
