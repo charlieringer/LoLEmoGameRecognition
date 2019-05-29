@@ -9,6 +9,11 @@ os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/graphviz-2.38/release
 
 
 def process_labels(raw_y_data):
+    """Takes raw labels and seperates them into the correct 'heads'
+    
+    :param raw_y_data: Raw inputd ata
+    :return: A tuple of arrays, where each array contains all lables for a given output
+    """
     valence = np.array([raw_y_data[' V_Neg'], raw_y_data[' V_Neut'], raw_y_data[' V_Pos']])
     arousal = np.array([raw_y_data[' A_Neut'], raw_y_data[' A_Pos']])
 
@@ -26,6 +31,16 @@ def process_labels(raw_y_data):
 
 
 def data_generator(data_dir, labels, batch_size, model_flag, include_tt_bias=False, shuffle_data=True):
+    """Makes and returns a generator which loads data from the supplied dir as and when needed
+    
+    :param data_dir: Folder containing the folders with the targets (data)
+    :param labels: Width of the image
+    :param batch_size: Number of images per batch
+    :param model_flag: Which outputs you want
+    :param include_tt_bias: Number of images per batch
+    :param shuffle_data: Bool is you want the data shuffled or not
+    :return: A generator to be used by a Keras model to read data
+    """
     y_data = read_csv(labels)
     if shuffle_data:
         y_data = y_data.sample(frac=1)
@@ -78,7 +93,7 @@ def get_generator(data_dir, labels, batch_size, model_flag, include_tt_bias=Fals
     :param labels: Width of the image
     :param batch_size: Number of images per batch
     :param include_tt_bias: Number of images per batch
-    :return: A generator to be used by a Keras model to read data
+    :return: A generator to be used by a Keras model to read data + the number of vidoes 
     """
     number_of_videos = len(read_csv(labels).index)
     return data_generator(data_dir, labels, batch_size, model_flag, include_tt_bias), number_of_videos

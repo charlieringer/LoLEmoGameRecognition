@@ -10,7 +10,10 @@ Copy all files/folders found there into this directory
 This data set needs to be convered into npy files first. This can be done with `utils/process_data_set.py`. Once that is complete `trainer.py` will run the full set of expeirments. 
 
 ## Requirmentments
+Requirements can be found on `requirements.txt` (pending).
 
 ## Cite this work
+Please cite this work as:
+`Ringer, Charles, Walker, James Alfred, Nicolaou, Mihalis A. (2019) Multimodal Joint Emotion and Game Context Recognition in League of Legends Livestreams, Charles Ringer, James Alfred Walker, Mihalis A Nicolaou, In: Proceedings of the IEEE Confernce on Games 2019. IEEE`
 
 ## Licence
