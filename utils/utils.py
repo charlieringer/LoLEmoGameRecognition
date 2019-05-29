@@ -2,7 +2,11 @@ from pandas import read_csv
 
 
 def calculate_class_weights(labels):
-
+    """Calculates a det of class weights
+    
+    :param labels: Pandas data frame of the labels
+    :return: A tuple of valence, arousal, and game weights
+    """
     annotations = read_csv(labels)
     total_labels = len(annotations.index)
 
@@ -66,16 +70,33 @@ def calculate_class_weights(labels):
     }
     return v_weights, a_weights, g_weights
 
-    def get_conf_matrx(model, data_gen, batch_size, n_videos, model_flag, outfile):
+def get_conf_matrx(model, data_gen, batch_size, n_videos, model_flag, outfile):
+    """Creates a file containing the confusion matrix for a given model
+    
+    :param model: Trained model
+    :param data_gen: A data_gen to calculate the conf mat on
+    :param batch_size: Batch size for the data_gen
+    :param n_videos: Number of videos in the data_gen
+    :param model_flag: Which model ("both, "game", "emo")
+    :param outfile: File name to save the conf mat to
+    """
     if model_flag == "both":
         get_conf_matrx_both(model, data_gen, batch_size, n_videos, outfile)
     elif model_flag == "game":
         get_conf_matrx_game(model, data_gen, batch_size, n_videos, outfile)
     else:
-        get_conf_matrx_face(model, data_gen, batch_size, n_videos, outfile)
+        get_conf_matrx_emo(model, data_gen, batch_size, n_videos, outfile)
 
 
 def get_conf_matrx_both(model, data_gen, batch_size, n_videos, outfile):
+    """Creates a file containing the confusion matrix for a given model trained for both game and emo
+    
+    :param model: Trained model
+    :param data_gen: A data_gen to calculate the conf mat on
+    :param batch_size: Batch size for the data_gen
+    :param n_videos: Number of videos in the data_gen
+    :param outfile: File name to save the conf mat to
+    """
     val_cnf_mat = [[0 for _ in range(3)] for _ in range(3)]
     aro_cnf_mat = [[0 for _ in range(2)] for _ in range(2)]
     gam_cnf_mat = [[0 for _ in range(8)] for _ in range(8)]
@@ -112,6 +133,14 @@ def get_conf_matrx_both(model, data_gen, batch_size, n_videos, outfile):
 
 
 def get_conf_matrx_game(model, data_gen, batch_size, n_videos, outfile):
+    """Creates a file containing the confusion matrix for a given model trained for game
+    
+    :param model: Trained model
+    :param data_gen: A data_gen to calculate the conf mat on
+    :param batch_size: Batch size for the data_gen
+    :param n_videos: Number of videos in the data_gen
+    :param outfile: File name to save the conf mat to
+    """
     gam_cnf_mat = [[0 for _ in range(8)] for _ in range(8)]
 
     output_file = open(outfile, "w")
@@ -131,7 +160,15 @@ def get_conf_matrx_game(model, data_gen, batch_size, n_videos, outfile):
     output_file.close()
 
 
-def get_conf_matrx_face(model, data_gen, batch_size, n_videos, outfile):
+def get_conf_matrx_emo(model, data_gen, batch_size, n_videos, outfile):
+        """Creates a file containing the confusion matrix for a given model trained for emo
+    
+    :param model: Trained model
+    :param data_gen: A data_gen to calculate the conf mat on
+    :param batch_size: Batch size for the data_gen
+    :param n_videos: Number of videos in the data_gen
+    :param outfile: File name to save the conf mat to
+    """
     val_cnf_mat = [[0 for _ in range(3)] for _ in range(3)]
     aro_cnf_mat = [[0 for _ in range(2)] for _ in range(2)]
 
