@@ -87,53 +87,6 @@ def _add_conv_block(x, filters_in, filters_out, block_id):
     return x
 
 
-def resnet_50(img_input, network_id=""):
-    """Builds and returns a resnet 50 model
-
-    :param img_input: Shape of the input image. Expected 256x256x3 as that provides a 1x1x1024 latent space encoding
-    :param network_id: ID of network
-    :return: The encoder (as a Keras model)
-    """
-
-    x = ZeroPadding2D(padding=(3, 3), name='%spre_conv_pad' % network_id)(img_input)
-    x = Conv2D(64, (7, 7), strides=(2, 2), padding='valid', name='%sconv1' % network_id)(x)
-    x = _add_norm_relu(x)
-    x = ZeroPadding2D(padding=(1, 1), name='%spre_pool_pad' % network_id)(x)
-    x = MaxPooling2D((3, 3), strides=(2, 2), name='%spool1' % network_id)(x)
-    # x = Dropout(0.2)(x)
-    x = _add_conv_block(x, 64, 256, '%sres1_1' % network_id)
-    x = _add_residual_block(x, 64, 256, '%sres1_2' % network_id)
-    x = _add_residual_block(x, 64, 256, '%sres1_3' % network_id)
-    # x = Dropout(0.2)(x)
-    x = _add_conv_block(x, 128, 512, '%sres2_1' % network_id)
-    x = _add_residual_block(x, 128, 512, '%sres2_2' % network_id)
-    x = _add_residual_block(x, 128, 512, '%sres2_3' % network_id)
-    x = _add_residual_block(x, 128, 512, '%sres2_4' % network_id)
-    # x = Dropout(0.2)(x)
-    x = _add_conv_block(x, 256, 1024, '%sres3_1' % network_id)
-    x = _add_residual_block(x, 256, 1024, '%sres3_2' % network_id)
-    x = _add_residual_block(x, 256, 1024, '%sres3_3' % network_id)
-    x = _add_residual_block(x, 256, 1024, '%sres3_4' % network_id)
-    x = _add_residual_block(x, 256, 1024, '%sres3_5' % network_id)
-    x = _add_residual_block(x, 256, 1024, '%sres3_6' % network_id)
-    # x = Dropout(0.2)(x)
-    x = _add_conv_block(x, 512, 2048, '%sres4_1' % network_id)
-    x = _add_residual_block(x, 512, 2048, '%sres4_2' % network_id)
-    x = _add_residual_block(x, 512, 2048, '%sres4_3' % network_id)
-    # x = Dropout(0.2)(x)
-    x = GlobalAveragePooling2D()(x)
-    x = Dense(512, activation='relu')(x)
-    # x = Dropout(0.2)(x)
-    # instantiate encoder model
-    model = Model(img_input, x, name='%s_resnet' % network_id)
-    # plot_model(encoder, to_file='encoder.png', show_shapes=True)
-    return model
-
-
-def td_resnet_50(img_input, network_id=""):
-    return TimeDistributed(resnet_50(img_input, network_id))
-
-
 def facenet(img_input, network_id=""):
     """Builds and returns a res face model
 

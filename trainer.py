@@ -1,10 +1,10 @@
-from utils.models import feature_fusion_model, late_fusion_model, tt_fusion_model
-from utils.data_set_descriptors import calculate_class_weights
+from models.models import early_fusion_model, late_fusion_model, tt_fusion_model
+from utils.utils import calculate_class_weights, get_conf_matrx
 import numpy as np
 import os
 from pandas import read_csv
-from utils.conf_mats import get_conf_matrx
 import pickle
+
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/graphviz-2.38/release/bin/'
 
 
@@ -94,7 +94,7 @@ def run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_lab
     elif fusion_type == "late":
         model = late_fusion_model(ts_size, model_flag)
     else:
-        model = feature_fusion_model(ts_size, model_flag)
+        model = early_fusion_model(ts_size, model_flag)
 
     history = model.fit_generator(train_gen, steps_per_epoch=int(n_train / batch_size),
                                   epochs=epochs, class_weight=class_weights)
@@ -105,83 +105,42 @@ def run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_lab
     get_conf_matrx(model, test_gen, batch_size, n_test, model_flag, test_out)
 
 
-def train_all_feature(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
+def train_all(ts_size, batch_size, epochs, data_dir, train_labels, test_labels, model):
     v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
 
     run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
                    [v_weights, a_weights, g_weights],
-                   "both", "feature",
-                   "trained_models/both_feature_fusion.h5", "training_history/both_feature_fusion.p",
-                   "results/both_feature_fusion.txt")
+                   "both", model,
+                   "trained_models/both_%s_fusion.h5" % model, 
+                   "training_history/both_%s_fusion.p" % model,
+                   "results/both_%s_fusion.txt" % model)
 
     run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
                    [g_weights],
-                   "game", "feature",
-                   "trained_models/game_feature_fusion.h5", "training_history/game_feature_fusion.p",
-                   "results/game_feature_fusion.txt")
+                   "game", model,
+                   "trained_models/game_%s_fusion.h5" % model, 
+                   "training_history/game_%s_fusion.p" % model,
+                   "results/game_%s_fusion.txt" % model)
 
     run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
                    [v_weights, a_weights],
-                   "face", "feature",
-                   "trained_models/face_feature_fusion.h5", "training_history/face_feature_fusion.p",
-                   "results/face_feature_fusion.txt")
-
-
-def train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
-    v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
-
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                  [v_weights, a_weights, g_weights],
-                  "both", "late",
-                  "trained_models/both_late_fusion.h5", "training_history/both_late_fusion.p",
-                  "results/both_late_fusion.txt")
-
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                   [g_weights],
-                   "game", "late",
-                   "trained_models/game_late_fusion.h5", "training_history/game_late_fusion.p",
-                   "results/game_late_fusion.txt")
-
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                   [v_weights, a_weights],
-                   "face", "late",
-                   "trained_models/face_late_fusion.h5", "training_history/face_late_fusion.p",
-                   "results/face_late_fusion.txt")
-
-
-def train_all_tt(ts_size, batch_size, epochs, data_dir, train_labels, test_labels):
-    v_weights, a_weights, g_weights = calculate_class_weights(train_labels)
-
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                   [v_weights, a_weights, g_weights],
-                   "both", "tt",
-                   "trained_models/both_tt_fusion.h5", "training_history/both_tt_fusion.p",
-                   "results/both_tt_fusion.txt")
-
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                   [g_weights],
-                   "game", "tt",
-                   "trained_models/game_tt_fusion.h5", "training_history/game_tt_fusion.p",
-                   "results/game_tt_fusion.txt")
-
-    run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
-                   [v_weights, a_weights],
-                   "face", "tt",
-                   "trained_models/face_tt_fusion.h5", "training_history/face_tt_fusion.p",
-                   "results/face_tt_fusion.txt")
+                   "face", model,
+                   "trained_models/face_%s_fusion.h5" % model, 
+                   "training_history/face_%s_fusion.p" % model,
+                   "results/face_%s_fusion.txt" % model)
 
 
 def main():
     ts_size = 20
     batch_size = 5
     epochs = 100
-    data_dir = "out"
+    data_dir = "processed"
     train_labels = "train_augmented.csv"
     test_labels = "test.csv"
 
-    #train_all_feature(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
-    train_all_late(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
-    train_all_tt(ts_size, batch_size, epochs, data_dir, train_labels, test_labels)
+    train_all(ts_size, batch_size, epochs, data_dir, train_labels, test_labels, "early")
+    train_all(ts_size, batch_size, epochs, data_dir, train_labels, test_labels, "late")
+    train_all(ts_size, batch_size, epochs, data_dir, train_labels, test_labels, "tt")
 
 
 if __name__ == "__main__":

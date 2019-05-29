@@ -5,6 +5,7 @@ import subprocess
 from librosa import load
 from scipy.stats import zscore
 import math
+import json
 from random import shuffle
 from pandas import read_csv
 
@@ -18,26 +19,8 @@ def generate_dummy_data(batch_size, ts_size):
 
 
 def get_face_location(streamer_id):
-	if streamer_id == "01":
-		return 424, 235, 543, 360
-	if streamer_id == "02":
-		return 416, 264, 540, 360
-	if streamer_id == "03":
-		return 403, 254, 546, 360
-	if streamer_id == "04":
-		return 405, 280, 550, 360
-	if streamer_id == "05":
-		return 437, 284, 551, 360
-	if streamer_id == "06":
-		return 424, 279, 549, 360
-	if streamer_id == "07":
-		return 0, 225, 166, 360
-	if streamer_id == "08":
-		return 0, 236, 137, 360
-	if streamer_id == "09":
-		return 0, 235, 195, 360
-	if streamer_id == "010":
-		return 415, 284, 543, 360
+	bounding_boxes = json.loads("../webcam_boxes.json")
+	return bounding_boxes[streamer_id]
 
 
 def get_streamer_id(video_str):
@@ -76,9 +59,7 @@ def process_frames(video, outdir, face_loc):
 		cv2.rectangle(frame, (face_loc[0], face_loc[1]), (face_loc[2], face_loc[3]), -1, -1)
 
 		face = cv2.resize(face, (64, 64))
-		# cv2.imwrite("%s/face_%i.png" % (outdir, curr_frame), face)
 		game = cv2.resize(frame, (128, 128))
-		# cv2.imwrite("%s/game_%i.png" % (outdir, curr_frame), game)
 		face_imgs.append(face)
 		game_imgs.append(game)
 
@@ -112,41 +93,9 @@ def process_audio(video, outdir):
 	np.save("%s/audio.npy" % outdir, processed_array)
 
 
-def split_data():
-	videos = [f.name for f in os.scandir("out/") if f.is_dir()]
-	shuffle(videos)
-	if not os.path.exists("out/train"):
-		os.makedirs("out/train")
-	if not os.path.exists("out/test"):
-		os.makedirs("out/test")
-
-	split_indx = int(len(videos)*0.8)
-	for video in videos[split_indx:]:
-		os.rename("out/%s" % video, "out/test/%s" % video)
-
-	for video in videos[:split_indx]:
-		os.rename("out/%s" % video, "out/train/%s" % video)
-
-
-def split_csv(in_file, out_train, out_test, test_split=0.8):
-	data = read_csv(in_file)
-	data = data[data[' Misc'] != 1]
-	n_data = len(data.index)
-	split = int(n_data*test_split)
-	data = data.sample(frac=1)
-
-	train_split = data[:split]
-	test_split = data[split:]
-
-	train_split.to_csv(out_train)
-	test_split.to_csv(out_test)
-
-
 def main():
-	split_csv("../master.csv", "train.csv", "test.csv")
-	return
 	data_dir = "../data/"
-	output_dir = "out/"
+	output_dir = "../processed/"
 	videos = [f for f in os.listdir(data_dir) if f.endswith(".mp4")]
 	
 	for video in videos:

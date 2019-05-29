@@ -5,12 +5,12 @@ from keras.optimizers import adam
 from keras.utils import plot_model
 from keras.regularizers import l2
 import os
-from utils.extern.TTLayer import TT_Layer
+from extern.TTLayer import TT_Layer
 
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/graphviz-2.38/release/bin/'
 
 
-def feature_fusion_model(ts_size, model_flag):
+def early_fusion_model(ts_size, model_flag):
 	face_input = Input((ts_size, 64, 64, 3))
 	game_input = Input((ts_size, 128, 128, 3))
 	audio_input = Input((ts_size, 5512, 1))
@@ -47,7 +47,7 @@ def feature_fusion_model(ts_size, model_flag):
 	model = Model([face_input, game_input, audio_input], outputs)
 
 	opt = adam(lr=0.0005)
-	plot_model(model, to_file='model_imgs/%s_feature.png' % model_flag, show_shapes=True)
+	plot_model(model, to_file='model_imgs/%s_early.png' % model_flag, show_shapes=True)
 	model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['acc'])
 	print(model.summary())
 	return model

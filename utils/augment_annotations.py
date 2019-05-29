@@ -104,5 +104,5 @@ def main():
 	calculate_class_weights(annotations)
 	annotations.to_csv("train_augmented.csv")
 
-
-main()
+if __name__ == "__main__":
+	main()
