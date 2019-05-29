@@ -2,3 +2,4 @@ data/
 out/
 *.h5
 *.csv
+.DS_Store
