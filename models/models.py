@@ -11,6 +11,12 @@ os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/graphviz-2.38/release
 
 
 def early_fusion_model(ts_size, model_flag):
+	"""Builds and returns a full early fusion model
+
+    :param ts_size: The length of the video time series sequence  
+    :param model_flag: Which outputs the model should use ("both", "game", "emo")
+    :return: The model (as a Keras model)
+    """
 	face_input = Input((ts_size, 64, 64, 3))
 	game_input = Input((ts_size, 128, 128, 3))
 	audio_input = Input((ts_size, 5512, 1))
@@ -30,7 +36,7 @@ def early_fusion_model(ts_size, model_flag):
 
 	outputs = []
 
-	if model_flag == "both" or model_flag == "face":
+	if model_flag == "both" or model_flag == "emo":
 		val_feats = Dense(128, activation="relu")(hidden_feats)
 		valence = Dense(3, activation='softmax')(val_feats)
 		outputs.append(valence)
@@ -54,6 +60,12 @@ def early_fusion_model(ts_size, model_flag):
 
 
 def late_fusion_model(ts_size, model_flag):
+	"""Builds and returns a full late fusion model
+
+    :param ts_size: The length of the video time series sequence  
+    :param model_flag: Which outputs the model should use ("both", "game", "emo")
+    :return: The model (as a Keras model)
+    """
 	face_input = Input((ts_size, 64, 64, 3))
 	game_input = Input((ts_size, 128, 128, 3))
 	audio_input = Input((ts_size, 5512, 1))
@@ -83,7 +95,7 @@ def late_fusion_model(ts_size, model_flag):
 
 	outputs = []
 
-	if model_flag == "both" or model_flag == "face":
+	if model_flag == "both" or model_flag == "emo":
 		val_feats = Dense(128, activation="relu")(hidden_feats)
 		valence = Dense(3, activation='softmax')(val_feats)
 		outputs.append(valence)
@@ -107,6 +119,12 @@ def late_fusion_model(ts_size, model_flag):
 
 
 def tt_fusion_model(ts_size, model_flag):
+	"""Builds and returns a full tt fusion model
+
+    :param ts_size: The length of the video time series sequence  
+    :param model_flag: Which outputs the model should use ("both", "game", "emo")
+    :return: The model (as a Keras model)
+    """
 	face_input = Input((ts_size, 64, 64, 3))
 	game_input = Input((ts_size, 128, 128, 3))
 	audio_input = Input((ts_size, 5512, 1))
@@ -152,7 +170,7 @@ def tt_fusion_model(ts_size, model_flag):
 
 	outputs = []
 
-	if model_flag == "both" or model_flag == "face":
+	if model_flag == "both" or model_flag == "emo":
 		val_feats = Dense(128, activation="relu")(hidden_feats)
 		valence = Dense(3, activation='softmax')(val_feats)
 		outputs.append(valence)

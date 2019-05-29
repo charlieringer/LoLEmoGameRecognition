@@ -1,34 +1,12 @@
 from pandas import read_csv
 
 
-def calculate_class_weights(annotations):
-	n_v_neg = annotations[' V_Neg'].sum()
-	n_v_neut = annotations[' V_Neut'].sum()
-	n_v_pos = annotations[' V_Pos'].sum()
-	n_a_neut = annotations[' A_Neut'].sum()
-	n_a_pos = annotations[' A_Pos'].sum()
-
-	tot = n_v_neg + n_v_neut + n_v_pos
-
-	print(float(n_v_neg/tot), " " , float(n_v_neut/tot), " ", float(n_v_pos/tot), " ",
-	      " ",  float(n_a_neut/tot), " ", float(n_a_pos/tot))
-
-	n_laning = annotations[' Laning'].sum()
-	n_shopping = annotations[' Shopping'].sum()
-	n_returning = annotations[' Returning'].sum()
-	n_roaming = annotations[' Roaming'].sum()
-	n_fighting = annotations[' Fighting'].sum()
-	n_pushing = annotations[' Pushing'].sum()
-	n_defending = annotations[' Defending'].sum()
-	n_dead = annotations[' Dead'].sum()
-
-	tot = n_laning + n_shopping + n_returning + n_roaming + n_fighting + n_pushing + n_defending + n_dead
-
-	print(float(n_laning/tot), " " , float(n_shopping/tot), " ", float(n_returning/tot), " ", float(n_roaming/tot),
-	      " ",  float(n_fighting/tot), " ", float(n_pushing/tot), " ", float(n_defending/tot), " ", float(n_dead/tot))
-
-
 def get_least_most_rep_class(annotations):
+	"""Gets the least and most represented class for all labels
+
+	:param annotations: A pandas data frame of the annotations
+	:return: A tuple of the most and least represented class (string)
+	"""
 	val_dict = {
 		' V_Neg': annotations[' V_Neg'].sum(),
 		' V_Neut': annotations[' V_Neut'].sum(),
@@ -87,10 +65,12 @@ def get_least_most_rep_class(annotations):
 
 
 def main():
+	"""Takes a csv of annotations and performs oversampling to help balence the data
+	"""
 	annotations = read_csv("../train.csv")
-	calculate_class_weights(annotations)
+	limit = 5517
 
-	for i in range(0, 5513):
+	for i in range(0, limit):
 		
 		least_class, most_class = get_least_most_rep_class(annotations)
 
@@ -101,7 +81,6 @@ def main():
 		samp = data.sample(1)
 		annotations = annotations.append(samp)
 
-	calculate_class_weights(annotations)
 	annotations.to_csv("train_augmented.csv")
 
 if __name__ == "__main__":

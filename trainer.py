@@ -63,7 +63,7 @@ def data_generator(data_dir, labels, batch_size, model_flag, include_tt_bias=Fal
 
         if model_flag == "both":
             outputs = [np.array(valence_labels), np.array(arousal_labels), np.array(game_event_labels)]
-        elif model_flag == "face":
+        elif model_flag == "emo":
             outputs = [np.array(valence_labels), np.array(arousal_labels)]
         else:
             outputs = [np.array(game_event_labels)]
@@ -124,10 +124,10 @@ def train_all(ts_size, batch_size, epochs, data_dir, train_labels, test_labels, 
 
     run_experiment(ts_size, batch_size, epochs, data_dir, train_labels, test_labels,
                    [v_weights, a_weights],
-                   "face", model,
-                   "trained_models/face_%s_fusion.h5" % model, 
-                   "training_history/face_%s_fusion.p" % model,
-                   "results/face_%s_fusion.txt" % model)
+                   "emo", model,
+                   "trained_models/emo_%s_fusion.h5" % model, 
+                   "training_history/emo_%s_fusion.p" % model,
+                   "results/emo_%s_fusion.txt" % model)
 
 
 def main():
