@@ -2,7 +2,7 @@
 This repository contains the code to support the paper "Multimodal Joint Emotion and Game Context Recognition in League of Legends Livestreams" presented at the 2019 IEEE Conference on Games. 
 
 ## Data
-The associated dataset can be downloaded from: 
+The associated dataset can be downloaded from: https://tinyurl.com/y5qakf2r
 
 Copy all files/folders found there into this directory
 
