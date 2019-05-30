@@ -81,7 +81,7 @@ def main():
 		samp = data.sample(1)
 		annotations = annotations.append(samp)
 
-	annotations.to_csv("train_augmented.csv")
+	annotations.to_csv("../train_augmented.csv")
 
 if __name__ == "__main__":
 	main()
