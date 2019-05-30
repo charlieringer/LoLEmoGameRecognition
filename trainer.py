@@ -155,7 +155,7 @@ def main():
 
     ts_size = 20
     batch_size = 5
-    epochs = 1
+    epochs = 100
     data_dir = "processed"
     train_labels = "train.csv"
     test_labels = "test.csv"
