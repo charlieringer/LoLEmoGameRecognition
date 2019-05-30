@@ -12,7 +12,7 @@ Copy all files/folders found there into this directory
 - Once these preprocessing steps are complete `trainer.py` will run the full set of experiments. 
 
 ## Requirements
-Requirements can be found in `requirements.txt`. These can be installed with `pip install -r requirements.txt`.
+That project requires Pythin 3.6.3 (other versions may work but are untested). Requirements can be found in `requirements.txt`. These can be installed with `pip install -r requirements.txt`.
 
 ## Cite this work
 Please cite this work as:
