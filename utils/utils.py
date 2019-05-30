@@ -161,7 +161,7 @@ def get_conf_matrx_game(model, data_gen, batch_size, n_videos, outfile):
 
 
 def get_conf_matrx_emo(model, data_gen, batch_size, n_videos, outfile):
-        """Creates a file containing the confusion matrix for a given model trained for emo
+    """Creates a file containing the confusion matrix for a given model trained for emo
     
     :param model: Trained model
     :param data_gen: A data_gen to calculate the conf mat on

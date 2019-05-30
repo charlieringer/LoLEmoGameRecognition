@@ -1,5 +1,8 @@
 data/
-out/
+processed/
+results/
+trained_models/
+training_history/
 *.h5
 *.csv
 *.json

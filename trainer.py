@@ -146,11 +146,18 @@ def train_all(ts_size, batch_size, epochs, data_dir, train_labels, test_labels, 
 
 
 def main():
+    if not os.path.exists("trained_models/"):
+        os.makedirs("trained_models/")
+    if not os.path.exists("training_history/"):
+        os.makedirs("training_history/")
+    if not os.path.exists("results/"):
+        os.makedirs("results/")
+
     ts_size = 20
     batch_size = 5
-    epochs = 100
+    epochs = 1
     data_dir = "processed"
-    train_labels = "train_augmented.csv"
+    train_labels = "train.csv"
     test_labels = "test.csv"
 
     train_all(ts_size, batch_size, epochs, data_dir, train_labels, test_labels, "early")

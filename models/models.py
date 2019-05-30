@@ -1,11 +1,11 @@
-from utils.base_models import td_facenet, td_gamenet, td_audionet
+from models.base_models import td_facenet, td_gamenet, td_audionet
 from keras.layers import Input, Dense, Dropout, LSTM, BatchNormalization, Concatenate, Lambda, Dot, Reshape
 from keras.models import Model
 from keras.optimizers import adam
 from keras.utils import plot_model
 from keras.regularizers import l2
 import os
-from extern.TTLayer import TT_Layer
+from models.extern.TTLayer import TT_Layer
 
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/graphviz-2.38/release/bin/'
 

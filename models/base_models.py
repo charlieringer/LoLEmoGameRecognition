@@ -156,7 +156,7 @@ def gamenet(img_input, network_id=""):
 
 
 def td_gamenet(img_input_s, network_id=""):
-        """Builds and returns a time distributed residual game model
+    """Builds and returns a time distributed residual game model
 
     :param img_input: Shape of the input image.
     :param network_id: ID of network

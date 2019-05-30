@@ -11,21 +11,21 @@ from pandas import read_csv
 
 
 def get_face_location(streamer_id):
-	 """Gets the webcam bounding box for a given streamer
-    
-    :param streamer_id: ID for the streamer
-    :return: Bounding box (tuple)
-    """
-	bounding_boxes = json.loads("../webcam_boxes.json")
-	return bounding_boxes[streamer_id]
+	"""Gets the webcam bounding box for a given streamer
+	:param streamer_id: ID for the streamer
+	:return: Bounding box (tuple)
+	"""
+	with open("../webcam_boxes.json", 'r') as f:
+		bounding_boxes = json.load(f)
+		return bounding_boxes[streamer_id]
 
 
 def get_streamer_id(video_str):
-	 """Gets the streamer ID based on the name of the video
-    
-    :param video_str: String name of the video
-    :return: String containing the streamers ID
-    """
+	"""Gets the streamer ID based on the name of the video
+
+	:param video_str: String name of the video
+	:return: String containing the streamers ID
+	"""
 	streamer_id = ""
 	started = False
 	for char in video_str:
@@ -40,11 +40,11 @@ def get_streamer_id(video_str):
 
 def process_frames(video, outdir, face_loc):
 	"""Processes and saves, as an npy file, the frames for the provided video
-    
-    :param video: Input video
-    :param outdir: Location to save the frames to
-    :param face_loc: Bounding box for the webcam 
-    """
+
+	:param video: Input video
+	:param outdir: Location to save the frames to
+	:param face_loc: Bounding box for the webcam 
+	"""
 	cap = cv2.VideoCapture(video)
 	face_imgs = []
 	game_imgs = []
@@ -80,10 +80,10 @@ def process_frames(video, outdir, face_loc):
 
 def process_audio(video, outdir):
 	"""Processes and saves, as an npy file, the audio for the provided video
-    
-    :param video: Input video
-    :param outdir: Location to save the frames to
-    """
+
+	:param video: Input video
+	:param outdir: Location to save the frames to
+	"""
 	if not os.path.exists(outdir):
 		os.makedirs(outdir)
 	os.system("ffmpeg -hide_banner -loglevel panic -y -i %s -vn -acodec copy %s" % (video, outdir + "/raw_audio.mp4"))
