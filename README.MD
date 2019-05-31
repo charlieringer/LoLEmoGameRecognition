@@ -19,4 +19,4 @@ Please cite this work as:
 `Ringer, Charles, Walker, James Alfred, Nicolaou, Mihalis A. (2019) Multimodal Joint Emotion and Game Context Recognition in League of Legends Livestreams, In: Proceedings of the IEEE Conference on Games 2019. IEEE`
 
 ## Licence
-TBC
+MIT
