@@ -4,7 +4,7 @@ This repository contains the code to support the paper "Multimodal Joint Emotion
 ## Data
 The associated dataset can be downloaded from: https://tinyurl.com/y5qakf2r
 
-Copy all files/folders found there into this directory
+Copy all files/folders found in the link to the code root folder if you wish to use them together. 
 
 ## Usage
 - The data set needs to be converted into npy files first. This can be done with `utils/process_data_set.py`. 
